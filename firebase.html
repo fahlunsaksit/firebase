@@ -16,6 +16,8 @@
     <button type="submit" onclick="saveData()">send</button>
     <button type="submit" onclick="readData()">readData</button>
 
+    <div id="showData"></div>
+
     <!-- The core Firebase JS SDK is always required and must be listed first -->
     <script src="https://www.gstatic.com/firebasejs/6.4.0/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/6.4.0/firebase-firestore.js"></script>
@@ -57,6 +59,11 @@
             db.collection("users").get().then((querySnapshot) => {
                 querySnapshot.forEach((doc) => {
                     console.log(`${doc.id} => ${doc.data().firstName}`);
+                    var node = document.createAttribute('p');
+                    var textNode = document.createTextNode('firstName: '+doc.data().firstName+'lastName: '+doc.data().lastName);
+                    node.appendChild(textNode);
+                    document.getElementById('showData').appendChild(node);
+
                 });
             });
         }
