@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>firebase</title>
+</head>
+
+<body>
+    <label for="">Name</label>
+    <input type="text" id="inputName">
+    <label for="">Lastname</label>
+    <input type="text" id="inputLastName">
+    <button type="submit" onclick="saveData()">send</button>
+    <button type="submit" onclick="readData()">readData</button>
+
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/6.4.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/6.4.0/firebase-firestore.js"></script>
+
+    <!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#config-web-app -->
+
+    <script>
+        // Your web app's Firebase configuration
+        var firebaseConfig = {
+            apiKey: "AIzaSyCM4n7-W-BF_IgLKga78beSyVaY8-1oOQk",
+            authDomain: "test-31dd7.firebaseapp.com",
+            databaseURL: "https://test-31dd7.firebaseio.com",
+            projectId: "test-31dd7",
+            storageBucket: "",
+            messagingSenderId: "643458101769",
+            appId: "1:643458101769:web:6ddbeb3d46412092"
+        };
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+        var db = firebase.firestore();
+
+        function saveData() {
+
+            db.collection("users").add({
+                    firstName: document.getElementById('inputName').value,
+                    lastName: document.getElementById('inputLastName').value
+                })
+                .then(function (docRef) {
+                    console.log("Document written with ID: ", docRef.id);
+                })
+                .catch(function (error) {
+                    console.error("Error adding document: ", error);
+                });
+            alert('save data in firebase');
+        }
+
+        function readData() {
+            db.collection("users").get().then((querySnapshot) => {
+                querySnapshot.forEach((doc) => {
+                    console.log(`${doc.id} => ${doc.data().firstName}`);
+                });
+            });
+        }
+    </script>
+</body>
+
+</html>
