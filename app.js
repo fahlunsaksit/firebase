@@ -21,7 +21,7 @@ function search() {
             e.innerHTML = '';
             querySnapshot.forEach(function (doc) {
                 $('.ulTest').append('<li>' + 'firstName : ' + doc.data().firstName + ' , ' + 'lastName : ' + doc.data().lastName + '</li>')
-                consol e.log(doc.data());
+                console.log(doc.data());
             });
 
         });
