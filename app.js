@@ -1,15 +1,29 @@
 var db = firebase.firestore();
 // for delete before data
-var e = document.querySelector(".ulTest"); 
+var e = document.querySelector(".ulTest");
 
-db.collection("users").onSnapshot(function (querySnapshot) {
-    e.innerHTML = '';
-    querySnapshot.forEach(function (doc) {
-        $('.ulTest').append('<li>' + 'firstName : ' + doc.data().firstName + ' , ' + 'lastName : ' + doc.data().lastName + '</li>')
-        console.log(doc.data());
+db.collection("users")
+    .onSnapshot(function (querySnapshot) {
+        e.innerHTML = '';
+        querySnapshot.forEach(function (doc) {
+            $('.ulTest').append('<li>' + 'firstName : ' + doc.data().firstName + ' , ' + 'lastName : ' + doc.data().lastName + '</li>')
+            console.log(doc.data());
+        });
+
     });
 
-});
+function search() {
+    var data = document.getElementById('inputSearch');
+    db.collection("users").where("firstName", "==", data.value)
+        .onSnapshot(function (querySnapshot) {
+            e.innerHTML = '';
+            querySnapshot.forEach(function (doc) {
+                $('.ulTest').append('<li>' + 'firstName : ' + doc.data().firstName + ' , ' + 'lastName : ' + doc.data().lastName + '</li>')
+                console.log(doc.data());
+            });
+
+        });
+}
 
 function saveData() {
     if (document.getElementById('inputName').value == "" || document.getElementById('inputLastName').value == "") {
@@ -28,13 +42,9 @@ function saveData() {
         alert('save data in firebase');
         document.getElementById('inputName').value = '';
         document.getElementById('inputLastName').value = '';
-
-
-
     }
 
 }
-
 function readData() {
     db.collection("users").get().then((querySnapshot) => {
         querySnapshot.forEach((doc) => {
