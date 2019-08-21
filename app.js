@@ -7,22 +7,25 @@ db.collection("users")
         e.innerHTML = '';
         querySnapshot.forEach(function (doc) {
             $('.ulTest').append('<li>' + 'firstName : ' + doc.data().firstName + ' , ' + 'lastName : ' + doc.data().lastName + '</li>')
-            console.log(doc.data());
+             console.log(doc.data());
         });
 
     });
 
 function search() {
-    var data = document.getElementById('inputSearch');
-    db.collection("users").where("firstName", "==", data.value)
+    var dataInputSearch = document.getElementById('inputSearch');
+    var dataSelectSearch = document.getElementById('selectSearch');
+    // console.log('dataInputSearch = ' + dataInputSearch + " " + "dataSelectSearch = " + dataSelectSearch);
+    db.collection("users").where(dataSelectSearch.value, "==", dataInputSearch.value)
         .onSnapshot(function (querySnapshot) {
             e.innerHTML = '';
             querySnapshot.forEach(function (doc) {
                 $('.ulTest').append('<li>' + 'firstName : ' + doc.data().firstName + ' , ' + 'lastName : ' + doc.data().lastName + '</li>')
-                console.log(doc.data());
+                consol e.log(doc.data());
             });
 
         });
+        dataInputSearch.value = '';
 }
 
 function saveData() {

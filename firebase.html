@@ -17,6 +17,23 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
     </script>
+    <style>
+        .form-control-fah {
+            /* display: block; */
+            /* width: 100%; */
+            height: calc(1.5em + 0.75rem + 2px);
+            padding: 0.375rem 0.75rem;
+            font-size: 1rem;
+            font-weight: 400;
+            line-height: 1.5;
+            color: #495057;
+            background-color: #fff;
+            background-clip: padding-box;
+            border: 1px solid #ced4da;
+            border-radius: 0.25rem;
+            transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+        }
+    </style>
 
 </head>
 
@@ -38,11 +55,16 @@
         <br><br>
         <div class="form-row">
             <div class="form-group col-md-6">
-                <label class="" for="">search by firstName</label>
+                <label class="" for="">search by</label>
+                <select class="form-control-fah" name="selectSearch" id="selectSearch">
+                    <option value="firstName">firstName</option>
+                    <option value="lastName">lastName</option>
+                </select>
                 <input class="form-control" type="text" id="inputSearch">
             </div>
             <div class="col-md-6">
-                    <button  style="margin-top: 5.5%" onclick="search()" type="submit" class="btn btn-success">search</button>
+                <button style="margin-top: 7%" onclick="search()" type="submit"
+                    class="btn btn-success">search</button>
             </div>
         </div>
         <br>
